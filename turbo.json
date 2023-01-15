@@ -1,0 +1,42 @@
+{
+  "pipeline": {
+    "build": {
+      "dependsOn": ["^build"],
+      "outputs": ["dist/**", ".next/**"]
+    },
+    "lint": {
+      "outputs": []
+    },
+    "start": {
+      "cache": false
+    },
+    "dev": {
+      "cache": false
+    },
+    "clean": {
+      "cache": false
+    },
+    "test": {
+      "cache": false
+    },
+    "check": {
+      "cache": false
+    },
+    "web": {
+      "dependsOn": []
+    },
+    "outstatic": {
+      "dependsOn": [],
+      "env": [
+        "FST_GITHUB_ACCESS_TOKEN",
+        "FST_GITHUB_BRANCH",
+        "FST_GITHUB_OWNER",
+        "FST_GITHUB_REPO",
+        "FST_FIELDS_SUFFIX",
+        "FST_EXCLUDED_PATHS",
+        "FST_USERNAME",
+        "FST_PASSWORD"
+      ]
+    }
+  }
+}
