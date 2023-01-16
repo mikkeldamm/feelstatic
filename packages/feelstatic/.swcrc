@@ -2,7 +2,13 @@
   "jsc": {
     "parser": {
       "syntax": "typescript",
-      "tsx": true
+      "tsx": true,
+      "decorators": true
+    },
+    "transform": {
+      "react": {
+        "runtime": "automatic"
+      }
     },
     "target": "es5",
     "loose": true,

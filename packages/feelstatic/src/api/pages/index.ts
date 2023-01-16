@@ -81,5 +81,5 @@ const getPages = async () => {
 };
 
 export default async function handler(_: NextApiRequest, res: NextApiResponse) {
-  res.status(200).send(await getPages());
+  res.status(200).send({ per: 'dum ' });
 }

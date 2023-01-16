@@ -1,3 +1,11 @@
-const config = require('tailwind-config/tailwind.config.js');
-
-module.exports = config;
+module.exports = {
+  content: ['./src/**/*.{js,ts,jsx,tsx}'],
+  theme: {
+    extend: {
+      boxShadow: {
+        input: 'rgba(0, 0, 0, 0.08) 0px 4px 12px',
+      },
+    },
+  },
+  plugins: [],
+};

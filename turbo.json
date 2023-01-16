@@ -25,7 +25,7 @@
     "web": {
       "dependsOn": []
     },
-    "outstatic": {
+    "feelstatic": {
       "dependsOn": [],
       "env": [
         "FST_GITHUB_ACCESS_TOKEN",

@@ -1,0 +1,11 @@
+{
+  "hero": {
+    "show_mores": [true, false],
+    "headline": "The best way to learn is to do",
+    "items": [
+      {
+        "show_more": { "value": true, "reference": "hero.show_mores" }
+      }
+    ]
+  }
+}
