@@ -1,0 +1,17 @@
+{
+  "introduction": "Introduction",
+  "getting-started": "Getting Started",
+  "-- Content --": {
+    "type": "separator",
+    "title": "Content"
+  },
+  "pages": "Pages",
+  "components": "Components",
+  "images": "Images",
+  "-- Advanced --": {
+    "type": "separator",
+    "title": "Advanced"
+  },
+  "seo": "SEO",
+  "security": "Security"
+}

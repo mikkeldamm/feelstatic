@@ -1,0 +1,103 @@
+import Link from 'next/link';
+import { Tab, Tabs } from 'nextra-theme-docs';
+import { Callout } from 'nextra-theme-docs';
+
+# Getting Started
+
+## Installation
+
+Inside your NextJS project directory, run the following:
+
+<Tabs items={['npm', 'pnpm', 'yarn']}>
+  <Tab>`npm install feelstatic`</Tab>
+  <Tab>`pnpm i feelstatic`</Tab>
+  <Tab>`yarn add feelstatic`</Tab>
+</Tabs>
+
+<Callout type="info">
+  If you are using TypeScript, Feelstatic comes with its types definitions within the package
+</Callout>
+
+## Quick Start
+
+### Add api route
+
+First you need to create a file called `[...fst].ts` in `pages/api/feelstatic`. This contains the dynamic api route handler for Feelstatic.
+
+```ts filename="pages/api/feelstatic/[...fst].ts"
+import { FeelstaticApi } from 'feelstatic/api';
+
+export default FeelstaticApi;
+```
+
+All requests to `/api/feelstatic/*` (pages, components, image etc.) will automatically be handled by Feelstatic.
+
+### Add page route
+
+Then you need to create a `page.tsx` file in `app/feelstatic/[...fst]`. This contains the Feelstatic application that you can access on the site.
+
+```ts filename="app/feelstatic/[...fst]/page.tsx"
+import { FeelstaticPage } from 'feelstatic';
+
+export default FeelstaticPage;
+```
+
+### Set environment variables
+
+There are 3 required environment variables that you need to set.
+
+```
+FST_GITHUB_OWNER
+```
+
+This should be set to the owner/person/organization url of the github repository (e.g. `mikkeldamm`)
+
+```
+FST_GITHUB_REPO
+```
+
+This should be set to the repository name (e.g. `feelstatic`)
+
+```
+FST_GITHUB_ACCESS_TOKEN
+```
+
+This is the most important one. You need to get your [github access token](https://github.com/settings/tokens?type=beta) and set it.
+
+<Callout type="default">
+    You should only allow the token to access the repository that you are working with, and only choose the following permissions:
+    - Read access to commit statuses and metadata
+    - Read and Write access to code
+
+</Callout>
+<Callout type="info">
+    Remember to set the environment variables in Vercel before deploying
+</Callout>
+
+### Create your first editable page
+
+Now you can start adding editable pages. This is done by adding a `page.json` file beside any `page.tsx` files in the `app` folder.
+
+Here is a small simple example of a page
+
+```json filename="app/page.json"
+{
+  "hero": {
+    "title": "Wow, is it so simple?!"
+  }
+}
+```
+
+Now you can import that `page.json` file in your `page.tsx` file and use its fields.
+
+```tsx filename="app/page.tsx"
+import page from './page.json';
+
+export default function Home() {
+  return (
+    <main>
+      <h1>{page.hero.title}</h1>
+    </main>
+  );
+}
+```
