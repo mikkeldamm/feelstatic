@@ -28,7 +28,7 @@ If you are in the case where middleware isn't an option or you just wanna secure
 
 ### Securing api routes
 
-```ts filename="pages/api/feelstatic/[...fst].ts"
+```ts filename="pages/api/feelstatic/[[...fst]].ts"
 import type { NextApiRequest, NextApiResponse, NextApiHandler } from 'next';
 import { FeelstaticApi } from 'feelstatic/api';
 
@@ -45,7 +45,7 @@ export default async function FeelstaticSafe(req: NextApiRequest, res: NextApiRe
 
 ### Securing page routes
 
-```ts filename="app/feelstatic/[...fst]/page.tsx"
+```ts filename="app/feelstatic/[[...fst]]/page.tsx"
 import { FeelstaticPage } from 'feelstatic';
 import { redirect } from 'next/navigation';
 
@@ -64,7 +64,7 @@ export default async function FeelstaticSafe({ params }) {
 
 You can take over what the signout button should do by passing in a function in the `FeelstaticPage` component.
 
-```ts filename="app/feelstatic/[...fst]/page.tsx"
+```ts filename="app/feelstatic/[[...fst]]/page.tsx"
 import { FeelstaticPage } from 'feelstatic';
 import { redirect } from 'next/navigation';
 

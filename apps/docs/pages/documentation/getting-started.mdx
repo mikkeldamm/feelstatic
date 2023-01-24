@@ -22,9 +22,9 @@ Inside your NextJS project directory, run the following:
 
 ### Add api route
 
-First you need to create a file called `[...fst].ts` in `pages/api/feelstatic`. This contains the dynamic api route handler for Feelstatic.
+First you need to create a file called `[[...fst]].ts` in `pages/api/feelstatic`. This contains the dynamic api route handler for Feelstatic.
 
-```ts filename="pages/api/feelstatic/[...fst].ts"
+```ts filename="pages/api/feelstatic/[[...fst]].ts"
 import { FeelstaticApi } from 'feelstatic/api';
 
 export default FeelstaticApi;
@@ -34,9 +34,9 @@ All requests to `/api/feelstatic/*` (pages, components, image etc.) will automat
 
 ### Add page route
 
-Then you need to create a `page.tsx` file in `app/feelstatic/[...fst]`. This contains the Feelstatic application that you can access on the site.
+Then you need to create a `page.tsx` file in `app/feelstatic/[[...fst]]`. This contains the Feelstatic application that you can access on the site.
 
-```ts filename="app/feelstatic/[...fst]/page.tsx"
+```ts filename="app/feelstatic/[[...fst]]/page.tsx"
 import { FeelstaticPage } from 'feelstatic';
 
 export default FeelstaticPage;

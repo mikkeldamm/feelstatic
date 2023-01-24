@@ -15,7 +15,7 @@ Therefor it's up to you as a developer to make sure the editable `.json` files a
 
 ## Avoid indexing of Feelstatic admin
 
-To avoid the admin interface of `/feelstatic` being indexed by search engines, you should ensure that route is denying indexing. It can easily be done by adding a `head.tsx` file in `app/feelstatic/[...fst]` where you can use head meta from the Feelstatic package.
+To avoid the admin interface of `/feelstatic` being indexed by search engines, you should ensure that route is denying indexing. It can easily be done by adding a `head.tsx` file in `app/feelstatic/[[...fst]]` where you can use head meta from the Feelstatic package.
 
 ```ts filename="app/feelstatic/[...fst]/head.tsx"
 import { FeelstaticHead } from 'feelstatic';
