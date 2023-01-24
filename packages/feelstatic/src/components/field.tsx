@@ -5,7 +5,7 @@ const FeelstaticFieldValue = ({ children }: { children: React.ReactNode }) => {
 export default function FeelstaticField(props: any): JSX.Element {
   const field = props.field as string;
   const values = props.values || [];
-  const matches = [...field?.matchAll(/{{(.+?)}}/gi)];
+  const matches = Array.from(field?.matchAll(/{{(.+?)}}/gi));
   const components = matches.reduce((mappedComponents, match, index) => {
     const valueComponent = values[index] as React.ComponentClass<any>;
     mappedComponents[match[0]] = valueComponent;
