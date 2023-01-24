@@ -6,7 +6,6 @@ export function* readDirectory(directories: string | string[]): Generator<string
   const allDirectories = Array.isArray(directories) ? directories : [directories];
   for (const directory of allDirectories) {
     if (!existsSync(directory)) {
-      console.log('-- Directory does not exist', directory);
       continue;
     }
 
