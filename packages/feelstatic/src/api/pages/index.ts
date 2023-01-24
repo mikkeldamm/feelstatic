@@ -74,7 +74,7 @@ const getPages = async () => {
 
       return {
         ...page,
-        lastModified: new Date(fileCommits.data[0].commit.committer.date),
+        lastModified: new Date(fileCommits?.data[0]?.commit?.committer?.date || 0),
       };
     })
   );

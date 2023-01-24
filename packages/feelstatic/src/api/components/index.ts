@@ -83,7 +83,7 @@ const getComponents = async () => {
 
       return {
         ...component,
-        lastModified: new Date(fileCommits.data[0].commit.committer.date),
+        lastModified: new Date(fileCommits?.data[0]?.commit?.committer?.date || 0),
       };
     })
   );
