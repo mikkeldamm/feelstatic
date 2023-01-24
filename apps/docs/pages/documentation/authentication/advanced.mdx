@@ -59,3 +59,26 @@ export default async function FeelstaticSafe({ params }) {
   return FeelstaticPage({ params });
 }
 ```
+
+## Signout button
+
+You can take over what the signout button should do by passing in a function in the `FeelstaticPage` component.
+
+```ts filename="app/feelstatic/[...fst]/page.tsx"
+import { FeelstaticPage } from 'feelstatic';
+import { redirect } from 'next/navigation';
+
+const signOut = () => {
+  // sign user out
+};
+
+export default async function FeelstaticSafe({ params }) {
+  const session = getYourSession();
+  if (!session) {
+    redirect('/login');
+    return;
+  }
+
+  return FeelstaticPage({ params, onSignOut: signOut });
+}
+```
