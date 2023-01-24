@@ -10,7 +10,7 @@
         "runtime": "automatic"
       }
     },
-    "target": "es5",
+    "target": "es2022",
     "loose": true,
     "minify": {
       "compress": false,

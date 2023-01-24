@@ -12,11 +12,11 @@ const octokit = new Octokit({
 const FIELDS_SUFFIX = process.env.FST_FIELDS_SUFFIX ? `.${process.env.FST_FIELDS_SUFFIX}` : '';
 const EXCLUDED_PATHS = process.env.FST_EXCLUDED_PATHS?.split(',') || ['/node_modules', '/public', '/.next', '/styles'];
 
-const getPages = async () => {
-  const ROOT_PATH = process.cwd();
-  const APP_PATH = join(ROOT_PATH, '/app');
-  const PAGES_PATH = join(ROOT_PATH, '/pages');
+const ROOT_PATH = process.cwd();
+const APP_PATH = join(ROOT_PATH, '/app');
+const PAGES_PATH = join(ROOT_PATH, '/pages');
 
+const getPages = async () => {
   const pages: FeelstaticPage[] = [];
 
   for await (const filePath of readDirectory([APP_PATH, PAGES_PATH])) {

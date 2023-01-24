@@ -12,15 +12,15 @@ const octokit = new Octokit({
 const FIELDS_SUFFIX = process.env.FST_FIELDS_SUFFIX ? `.${process.env.FST_FIELDS_SUFFIX}` : '';
 const EXCLUDED_PATHS = process.env.FST_EXCLUDED_PATHS?.split(',') || ['/node_modules', '/public', '/.next', '/styles'];
 
-const getComponents = async () => {
-  const ROOT_PATH = process.cwd();
-  const APP_PATH = join(ROOT_PATH, '/app');
-  const PAGES_PATH = join(ROOT_PATH, '/pages');
-  const COMPONENTS_PATH = join(ROOT_PATH, '/components');
-  const FEATURES_PATH = join(ROOT_PATH, '/features');
-  const VIEWS_PATH = join(ROOT_PATH, '/views');
-  const PACKAGES_PATH = join(ROOT_PATH, '/packages');
+const ROOT_PATH = process.cwd();
+const APP_PATH = join(ROOT_PATH, '/app');
+const PAGES_PATH = join(ROOT_PATH, '/pages');
+const COMPONENTS_PATH = join(ROOT_PATH, '/components');
+const FEATURES_PATH = join(ROOT_PATH, '/features');
+const VIEWS_PATH = join(ROOT_PATH, '/views');
+const PACKAGES_PATH = join(ROOT_PATH, '/packages');
 
+const getComponents = async () => {
   const components: FeelstaticComponent[] = [];
 
   for await (const filePath of readDirectory([

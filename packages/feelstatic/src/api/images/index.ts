@@ -16,7 +16,7 @@ const getImages = async (): Promise<FeelstaticImage[]> => {
   const mapped = paths
     .map((path) => {
       const name = path;
-      const extension = extname(path).replace('.', '');
+      const extension = extname(path).replace('.', '').toLowerCase();
       const src = `/images/${path}`;
       return {
         name,
