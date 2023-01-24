@@ -1,6 +1,6 @@
 {
   "name": "feelstatic",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "description": "Edit content and fields for static sites in Next.js",
   "author": "Mikkel Damm <mikkeldamm@hotmail.com>",
   "license": "MIT",
