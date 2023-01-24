@@ -42,6 +42,19 @@ import { FeelstaticPage } from 'feelstatic';
 export default FeelstaticPage;
 ```
 
+### Transpile package
+
+Since Feelstatic is built as an es6 module, then you need to tell NextJS to transpile the package. It is luckily as simple as this:
+
+```js filename="next.config.js"
+const nextConfig = {
+  transpilePackages: ['feelstatic'],
+  ...
+};
+
+module.exports = nextConfig;
+```
+
 ### Set environment variables
 
 There are 3 required environment variables that you need to set.
