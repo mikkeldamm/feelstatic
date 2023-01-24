@@ -1,9 +1,7 @@
 'use client';
 
 import { RiArrowLeftLine } from 'react-icons/ri';
-import useSWR from 'swr';
-import { FeelstaticComponent } from '../../../state/component';
-import { fetcher } from '../../../utils/fetcher';
+import { useComponents, useImages } from '../../../state/admin/hooks';
 import AdminViewListItem from '../primitives/AdminViewListItem';
 import AdminComponent from './AdminComponent';
 
@@ -12,7 +10,8 @@ type Props = {
 };
 
 export default function AdminComponents({ componentUrl }: Props) {
-  const { data: components } = useSWR<FeelstaticComponent[]>('/api/feelstatic/components', fetcher);
+  useImages();
+  const { components } = useComponents();
   const component = components?.find((component) => component.url === componentUrl);
 
   return (

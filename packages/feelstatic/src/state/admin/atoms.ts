@@ -37,6 +37,22 @@ export const savePageDraftAtom = atom(null, (get, _, updatedPage: FeelstaticPage
   mutate('/api/feelstatic/pages', updatedPages);
 });
 
+export const saveComponentDraftAtom = atom(null, (get, _, updatedComponent: FeelstaticComponent) => {
+  const components = get(componentsAtom);
+  const updatedComponents = components.map((component) => {
+    return component.url === updatedComponent.url
+      ? {
+          ...updatedComponent,
+          lastModified: new Date(),
+          isDraft: true,
+        }
+      : component;
+  });
+
+  setItem('feelstatic:components', updatedComponents);
+  mutate('/api/feelstatic/components', updatedComponents);
+});
+
 export const saveImageDraftAtom = atom(null, (get, _, updatedImage: FeelstaticImage) => {
   const images = get(imagesAtom);
   const updatedImages = [

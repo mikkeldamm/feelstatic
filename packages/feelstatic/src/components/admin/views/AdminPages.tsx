@@ -1,7 +1,7 @@
 'use client';
 
 import { RiArrowLeftLine } from 'react-icons/ri';
-import { usePages } from '../../../state/admin/hooks';
+import { useImages, usePages } from '../../../state/admin/hooks';
 import AdminViewListItem from '../primitives/AdminViewListItem';
 import AdminPage from './AdminPage';
 
@@ -10,7 +10,7 @@ type Props = {
 };
 
 export default function AdminPages({ pageUrl }: Props) {
-  // useImages();
+  useImages();
   const { pages } = usePages();
   const page = pages?.find((page) => page.url === pageUrl);
 

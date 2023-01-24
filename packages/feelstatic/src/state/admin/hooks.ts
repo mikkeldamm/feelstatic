@@ -4,11 +4,12 @@ import { useContext } from 'react';
 import useSWR from 'swr';
 import { fetcher } from '../../utils/fetcher';
 import { getItem, setItem } from '../../utils/storage';
+import { FeelstaticComponent } from '../component';
 import { FeelstaticRepeater } from '../field';
 import { FeelstaticImage } from '../image';
 import { FeelstaticPage } from '../page';
-import { imagesAtom, pagesAtom, savePageDraftAtom } from './atoms';
-import { PageContext } from './contexts';
+import { componentsAtom, imagesAtom, pagesAtom, saveComponentDraftAtom, savePageDraftAtom } from './atoms';
+import { ComponentContext, PageContext } from './contexts';
 
 export const usePages = () => {
   const [pages, setPages] = useAtom(pagesAtom);
@@ -38,6 +39,40 @@ export const usePages = () => {
 
   return {
     pages,
+    isLoading,
+    isError: error ? true : false,
+  };
+};
+
+export const useComponents = () => {
+  const [components, setComponents] = useAtom(componentsAtom);
+
+  const { isLoading, error } = useSWR<FeelstaticComponent[]>('/api/feelstatic/components', fetcher, {
+    onSuccess: (apiComponents) => {
+      const cachedComponents = getItem<FeelstaticComponent[]>('feelstatic:components') || [];
+      const mappedComponents = apiComponents.map((apiComponent) => {
+        const cachedComponent = cachedComponents.find(
+          (cachedComponent) =>
+            cachedComponent.url === apiComponent.url &&
+            new Date(cachedComponent.lastModified) > new Date(apiComponent.lastModified)
+        );
+        if (cachedComponent) {
+          return {
+            ...cachedComponent,
+            isDraft: true,
+          };
+        }
+
+        return { ...apiComponent, isDraft: false };
+      });
+
+      setComponents(mappedComponents);
+      setItem('feelstatic:components', mappedComponents);
+    },
+  });
+
+  return {
+    components,
     isLoading,
     isError: error ? true : false,
   };
@@ -206,6 +241,117 @@ export const usePage = () => {
           [group]: {
             ...page.groups[group],
             [field]: arrayMove(page.groups[group][field] as FeelstaticRepeater, oldIndex, newIndex),
+          },
+        },
+      });
+    },
+  };
+};
+
+export const useComponent = () => {
+  const { component, setComponent } = useContext(ComponentContext);
+  const saveComponentDraft = useSetAtom(saveComponentDraftAtom);
+
+  return {
+    saveDraft: () => {
+      if (!component) {
+        return;
+      }
+
+      saveComponentDraft(component);
+    },
+    updateField: ({ group, field, value, repeater }: UpdateFieldParams) => {
+      if (!component) {
+        return;
+      }
+
+      if (repeater) {
+        setComponent({
+          ...component,
+          groups: {
+            ...component.groups,
+            [group]: {
+              ...component.groups[group],
+              [repeater.field]: (component.groups[group][repeater.field] as FeelstaticRepeater).map((item, index) => {
+                return index === repeater.index
+                  ? {
+                      ...item,
+                      [field]: value,
+                    }
+                  : item;
+              }),
+            },
+          },
+        });
+      } else {
+        setComponent({
+          ...component,
+          groups: {
+            ...component.groups,
+            [group]: {
+              ...component.groups[group],
+              [field]: value,
+            },
+          },
+        });
+      }
+    },
+    addRepeaterItem: ({ group, field }: AddFieldParams) => {
+      if (!component) {
+        return;
+      }
+
+      const repeater = component.groups[group][field] as FeelstaticRepeater;
+      const firstItem = repeater[0];
+      if (!firstItem) {
+        return;
+      }
+
+      const copiedItem = { ...firstItem };
+      const cleanedItem = Object.entries(copiedItem).reduce((acc, [key, value]) => {
+        acc[key] = typeof value === 'string' ? '' : typeof value === 'number' ? 0 : false;
+        return acc;
+      }, copiedItem);
+
+      setComponent({
+        ...component,
+        groups: {
+          ...component.groups,
+          [group]: {
+            ...component.groups[group],
+            [field]: [...(component.groups[group][field] as FeelstaticRepeater), cleanedItem],
+          },
+        },
+      });
+    },
+    removeRepeaterItem: ({ group, field, index }: RemoveFieldParams) => {
+      if (!component) {
+        return;
+      }
+
+      setComponent({
+        ...component,
+        groups: {
+          ...component.groups,
+          [group]: {
+            ...component.groups[group],
+            [field]: (component.groups[group][field] as FeelstaticRepeater).filter((_, i) => i !== index),
+          },
+        },
+      });
+    },
+    reorderRepeaterItem: ({ group, field, oldIndex, newIndex }: ReorderFieldParams) => {
+      if (!component) {
+        return;
+      }
+
+      setComponent({
+        ...component,
+        groups: {
+          ...component.groups,
+          [group]: {
+            ...component.groups[group],
+            [field]: arrayMove(component.groups[group][field] as FeelstaticRepeater, oldIndex, newIndex),
           },
         },
       });
