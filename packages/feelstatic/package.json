@@ -1,6 +1,6 @@
 {
   "name": "feelstatic",
-  "version": "0.1.0",
+  "version": "0.1.7",
   "description": "Edit content and fields for static sites in Next.js",
   "author": "Mikkel Damm <mikkeldamm@hotmail.com>",
   "license": "MIT",
@@ -9,11 +9,16 @@
   "exports": {
     ".": "./dist/index.js",
     "./api": "./dist/api/index.js",
+    "./field": "./dist/components/field.js",
     "./middleware": "./dist/middleware/index.js",
     "./feelstatic.css": "./dist/feelstatic.css"
   },
   "files": [
     "dist",
+    "field.d.ts",
+    "api.d.ts",
+    "middleware.d.ts",
+    "types.d.ts",
     "package.json",
     "README.md"
   ],
@@ -21,7 +26,7 @@
     "dev": "pnpm run dev:styles && pnpm run build:types && pnpm run dev:files",
     "dev:styles": "tailwindcss -i ./src/feelstatic.css -o ./dist/feelstatic.css && tailwindcss -i ./src/feelstatic.css -o ./dist/feelstatic.css --watch",
     "dev:files": "swc src -d dist --watch",
-    "build": "pnpm run clean && pnpm run build:styles && pnpm run build:files && pnpm run build:types",
+    "build": "pnpm run clean && pnpm run build:styles && pnpm run build:types && pnpm run build:files",
     "build:styles": "tailwindcss ./src/feelstatic.css -o ./dist/feelstatic.css",
     "build:files": "swc src -d dist",
     "build:types": "tsc",

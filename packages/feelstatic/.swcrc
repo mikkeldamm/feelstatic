@@ -17,9 +17,7 @@
       "mangle": false
     }
   },
-  "module": {
-    "type": "es6"
-  },
+  "module": { "type": "es6" },
   "minify": true,
   "isModule": true
 }

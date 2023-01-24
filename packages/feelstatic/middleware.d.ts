@@ -1,1 +1,1 @@
-export * from './src/middleware';
+export * from './dist/middleware';
