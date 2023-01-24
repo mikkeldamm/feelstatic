@@ -4,9 +4,6 @@
       "dependsOn": ["^build"],
       "outputs": ["dist/**", ".next/**"]
     },
-    "lint": {
-      "outputs": []
-    },
     "start": {
       "cache": false
     },
@@ -17,9 +14,6 @@
       "cache": false
     },
     "test": {
-      "cache": false
-    },
-    "check": {
       "cache": false
     },
     "web": {
