@@ -2,6 +2,7 @@ import { Inter } from '@next/font/google';
 import Image from 'next/image';
 import styles from './page.module.css';
 
+import Footer from '@/components/footer';
 import page from './page.json';
 
 const inter = Inter({ subsets: ['latin'] });
@@ -70,6 +71,7 @@ export default function Home() {
           <p className={inter.className}>Instantly deploy your Next.js site to a shareable URL with Vercel.</p>
         </a>
       </div>
+      <Footer />
     </main>
   );
 }
