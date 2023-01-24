@@ -1,0 +1,61 @@
+# Advanced
+
+[Basic authentication](/documentation/authentication/basic) is built and exported from Feelstatic for easy use, but there can be some cases where you want a different authentication than the one from Feelstatic.
+
+## Existing authentication
+
+Since Feelstatic only works with the two main routes `/feelstatic/*` and `/api/feelstatic/*` then it can be fairly easy to secure Feelstatic by extenting an existing Authentication implementation with rules that secures those two routes.
+
+### NextAuth.js example
+
+If you are using [NextAuth](https://next-auth.js.org) and can opt in on the middleware solution, then it will be as simple as adding the feelstatic routes to matcher config.
+
+```ts filename="middleware.ts"
+export { default } from 'next-auth/middleware';
+
+export const config = {
+  matcher: [
+    '/dashboard',
+    '/feelstatic/(.*)', // <-- add this route
+    '/api/feelstatic/((?!auth).*)', // <-- add this route
+  ],
+};
+```
+
+## Without middleware
+
+If you are in the case where middleware isn't an option or you just wanna secure on the specific route levels, then you can wrap the Feelstatic exports with your authentication implementation.
+
+### Securing api routes
+
+```ts filename="pages/api/feelstatic/[...fst].ts"
+import type { NextApiRequest, NextApiResponse, NextApiHandler } from 'next';
+import { FeelstaticApi } from 'feelstatic/api';
+
+export default async function FeelstaticSafe(req: NextApiRequest, res: NextApiResponse) {
+  const session = getYourSession();
+  if (!session) {
+    res.status(401).end();
+    return;
+  }
+
+  return await FeelstaticApi(req, res);
+}
+```
+
+### Securing page routes
+
+```ts filename="app/feelstatic/[...fst]/page.tsx"
+import { FeelstaticPage } from 'feelstatic';
+import { redirect } from 'next/navigation';
+
+export default async function FeelstaticSafe({ params }) {
+  const session = getYourSession();
+  if (!session) {
+    redirect('/login');
+    return;
+  }
+
+  return FeelstaticPage({ params });
+}
+```
