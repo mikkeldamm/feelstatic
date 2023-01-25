@@ -26,11 +26,21 @@ First you need to create a file called `[[...fst]].ts` in `pages/api/feelstatic`
 
 ```ts filename="pages/api/feelstatic/[[...fst]].ts"
 import { FeelstaticApi } from 'feelstatic/api';
+import { join } from 'path';
 
-export default FeelstaticApi;
+export default FeelstaticApi({
+  paths: {
+    root: process.cwd(),
+    pages: [join(process.cwd(), '/app'), join(process.cwd(), '/pages')],
+    components: [join(process.cwd(), '/app'), join(process.cwd(), '/components')],
+    images: join(process.cwd(), '/public/images'),
+  },
+});
 ```
 
 All requests to `/api/feelstatic/*` (pages, components, image etc.) will automatically be handled by Feelstatic.
+
+The reason why you need to specify and join the paths here is because when NextJS builds on Vercel, then it will only trace (output) files needed for that specific handler - in this case the Feelstatic API. So if you don't specific the paths where your json and image are located, then Feelstatic won't be able to fetch and show them.
 
 ### Add page route
 
@@ -40,19 +50,6 @@ Then you need to create a `page.tsx` file in `app/feelstatic/[[...fst]]`. This c
 import { FeelstaticPage } from 'feelstatic';
 
 export default FeelstaticPage;
-```
-
-### Transpile package
-
-Since Feelstatic is built as an es6 module, then you need to tell NextJS to transpile the package. It is luckily as simple as this:
-
-```js filename="next.config.js"
-const nextConfig = {
-  transpilePackages: ['feelstatic'],
-  ...
-};
-
-module.exports = nextConfig;
 ```
 
 ### Set environment variables

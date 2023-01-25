@@ -1,6 +1,6 @@
 {
   "name": "feelstatic",
-  "version": "0.1.9",
+  "version": "0.1.11",
   "description": "Edit content and fields for static sites in Next.js",
   "author": "Mikkel Damm <mikkeldamm@hotmail.com>",
   "license": "MIT",
@@ -26,10 +26,11 @@
     "dev": "pnpm run dev:styles && pnpm run build:types && pnpm run dev:files",
     "dev:styles": "tailwindcss -i ./src/feelstatic.css -o ./dist/feelstatic.css && tailwindcss -i ./src/feelstatic.css -o ./dist/feelstatic.css --watch",
     "dev:files": "swc src -d dist --watch",
-    "build": "pnpm run clean && pnpm run build:styles && pnpm run build:types && pnpm run build:files",
+    "build": "pnpm run clean && pnpm run build:styles && pnpm run build:types && pnpm run build:files && pnpm run build:use-client",
     "build:styles": "tailwindcss ./src/feelstatic.css -o ./dist/feelstatic.css",
     "build:files": "swc src -d dist",
     "build:types": "tsc",
+    "build:use-client": "replace-in-files --string='\"use client\"' --replacement='\"\"' 'dist/**/{AdminFooter,AdminLayout,AdminNavigation,AdminSignOut,AdminComponent,AdminComponents,AdminPage,AdminPages,AdminMedia,AdminPublish}.js' && replace-in-files --string='\"use strict\";' --replacement='\"use client\";\n\"use strict\";' 'dist/**/{AdminFooter,AdminLayout,AdminNavigation,AdminSignOut,AdminComponent,AdminComponents,AdminPage,AdminPages,AdminMedia,AdminPublish}.js'",
     "clean": "rm -rf dist",
     "test": "jest --passWithNoTests",
     "check": "tsc --project tsconfig.json --noEmit",
@@ -64,7 +65,8 @@
     "react-dom": "18.2.0",
     "tailwindcss": "3.2.4",
     "postcss": "8.4.21",
-    "typescript": "4.9.4"
+    "typescript": "4.9.4",
+    "replace-in-files-cli": "2.0.0"
   },
   "peerDependencies": {
     "next": "^13",

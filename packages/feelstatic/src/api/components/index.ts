@@ -1,6 +1,5 @@
 import { Octokit } from '@octokit/rest';
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { join } from 'path';
 import { FeelstaticComponent } from '../../state/component';
 import type { FeelstaticGroup } from '../../state/group';
 import { readDirectory, readJsonFile } from '../../utils/fs';
@@ -12,25 +11,10 @@ const octokit = new Octokit({
 const FIELDS_SUFFIX = process.env.FST_FIELDS_SUFFIX ? `.${process.env.FST_FIELDS_SUFFIX}` : '';
 const EXCLUDED_PATHS = process.env.FST_EXCLUDED_PATHS?.split(',') || ['/node_modules', '/public', '/.next', '/styles'];
 
-const ROOT_PATH = process.cwd();
-const APP_PATH = join(ROOT_PATH, '/app');
-const PAGES_PATH = join(ROOT_PATH, '/pages');
-const COMPONENTS_PATH = join(ROOT_PATH, '/components');
-const FEATURES_PATH = join(ROOT_PATH, '/features');
-const VIEWS_PATH = join(ROOT_PATH, '/views');
-const PACKAGES_PATH = join(ROOT_PATH, '/packages');
-
-const getComponents = async () => {
+const getComponents = async (rootPath: string, paths: string[]) => {
   const components: FeelstaticComponent[] = [];
 
-  for await (const filePath of readDirectory([
-    APP_PATH,
-    PAGES_PATH,
-    COMPONENTS_PATH,
-    FEATURES_PATH,
-    VIEWS_PATH,
-    PACKAGES_PATH,
-  ])) {
+  for await (const filePath of readDirectory(paths)) {
     if (EXCLUDED_PATHS.some((path) => filePath.includes(path))) {
       continue;
     }
@@ -43,7 +27,7 @@ const getComponents = async () => {
       continue;
     }
 
-    const componentPath = filePath.replace(ROOT_PATH, '') || '/';
+    const componentPath = filePath.replace(rootPath, '') || '/';
     const componentPaths = componentPath.split('/');
     if (componentPaths.length <= 2) {
       continue;
@@ -89,6 +73,6 @@ const getComponents = async () => {
   );
 };
 
-export default async function handler(_: NextApiRequest, res: NextApiResponse) {
-  res.status(200).send(await getComponents());
+export default async function handler(rootPath: string, paths: string[], _: NextApiRequest, res: NextApiResponse) {
+  res.status(200).send(await getComponents(rootPath, paths));
 }
