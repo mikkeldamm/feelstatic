@@ -1,11 +1,11 @@
 'use client';
 
 export const signOut = async () => {
-  window.location.href = '/';
-  await fetch(location.origin + '/feelstatic', {
+  fetch(`/api/feelstatic/pages`, {
     method: 'GET',
     headers: {
-      Authorization: 'Basic abc',
+      Authorization: 'Basic imsigningout',
     },
   });
+  window.location.href = '/';
 };

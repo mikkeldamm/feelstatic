@@ -1,4 +1,3 @@
-import React from 'react';
 import AdminLayout from '../components/admin/AdminLayout';
 import AdminComponents from '../components/admin/views/AdminComponents';
 import AdminMedia from '../components/admin/views/AdminMedia';
