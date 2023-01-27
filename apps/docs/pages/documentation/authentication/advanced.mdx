@@ -16,8 +16,8 @@ export { default } from 'next-auth/middleware';
 export const config = {
   matcher: [
     '/dashboard',
-    '/feelstatic/(.*)', // <-- add this route
-    '/api/feelstatic/((?!auth).*)', // <-- add this route
+    '/feelstatic(.*)', // <-- add this route
+    '/api/feelstatic/((?!/auth).*)', // <-- add this route
   ],
 };
 ```

@@ -13,7 +13,7 @@ You can add it by creating a `middleware.ts` files in the root of your NextJS pr
 export { default } from 'feelstatic/middleware';
 
 export const config = {
-  matcher: ['/feelstatic/(.*)', '/api/feelstatic/((?!auth).*)'],
+  matcher: ['/feelstatic(.*)', '/api/feelstatic/((?!/auth).*)'],
 };
 ```
 
