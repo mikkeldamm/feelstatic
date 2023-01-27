@@ -1,14 +1,14 @@
 # Advanced
 
-[Basic authentication](/documentation/authentication/basic) is built and exported from Feelstatic for easy use, but there can be some cases where you want a different authentication than the one from Feelstatic.
+Feelstatic exports [basic authentication](/documentation/authentication/basic) for convenience, however, there may be instances where a different form of authentication is desired.
 
 ## Existing authentication
 
-Since Feelstatic only works with the two main routes `/feelstatic/*` and `/api/feelstatic/*` then it can be fairly easy to secure Feelstatic by extenting an existing Authentication implementation with rules that secures those two routes.
+Since Feelstatic only has two main routes (`/feelstatic/*` and `/api/feelstatic/*`), securing it becomes relatively simple. This can be achieved by extending an existing Authentication implementation and adding rules that specifically protect those routes.
 
 ### NextAuth.js example
 
-If you are using [NextAuth](https://next-auth.js.org) and can opt in on the middleware solution, then it will be as simple as adding the feelstatic routes to matcher config.
+If you have opted in to the middleware solution with [NextAuth](https://next-auth.js.org), adding the feelstatic routes to your matcher config will be easy.
 
 ```ts filename="middleware.ts"
 export { default } from 'next-auth/middleware';
@@ -24,7 +24,7 @@ export const config = {
 
 ## Without middleware
 
-If you are in the case where middleware isn't an option or you just wanna secure on the specific route levels, then you can wrap the Feelstatic exports with your authentication implementation.
+If middleware is not an option for you or you prefer to secure specific route levels, you can use your own authentication implementation to wrap the exports of Feelstatic.
 
 ### Securing api routes
 
@@ -62,7 +62,7 @@ export default async function FeelstaticSafe({ params }) {
 
 ## Signout button
 
-You can take over what the signout button should do by passing in a function in the `FeelstaticPage` component.
+You have the ability to control the functionality of the signout button by passing a function into the `FeelstaticPage` component.
 
 ```ts filename="app/feelstatic/[[...fst]]/page.tsx"
 import { FeelstaticPage } from 'feelstatic';
