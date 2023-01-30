@@ -2,12 +2,11 @@ import { Callout } from 'nextra-theme-docs';
 
 # Basic
 
-Since Feelstatic works by changing local `.json` files and pushing them to your repo, I highly recommend that you add authentication above Feelstatic.
+Since Feelstatic works by changing local `.json` files and pushing them to your repo, I highly recommend that you add authentication to Feelstatic.
 
 ## Basic authentication
 
-The most simple way to add a layer of authentication to Feelstatic is to use the built in `Basic authentication`. It works by securing your `/feelstatic` & `/api/feelstatic` routes from the middleware.
-You can add it by creating a `middleware.ts` files in the root of your NextJS project with the following content:
+A simple way to add authentication to Feelstatic, is to use the built-in Basic authentication feature. This will secure the `/feelstatic` and `/api/feelstatic` routes via middleware. To implement this, create a `middleware.ts` file in the root of your Next.js project and add the following code:
 
 ```ts filename="middleware.ts"
 export { default } from 'feelstatic/middleware';
@@ -17,11 +16,11 @@ export const config = {
 };
 ```
 
-The reason why the route `/api/feelstatic/auth` is excluded, is because thats the route that tells the browser to force basic authentication.
+The route `/api/feelstatic/auth` is excluded because it is the route that instructs the browser to enforce basic authentication.
 
 ## Username and Password
 
-Basic authentication requires an username and a password. This is the environment variables you need to set:
+Basic authentication requires an username and password. Set the following environment variables in your project:
 
 ```bash
 FST_USERNAME

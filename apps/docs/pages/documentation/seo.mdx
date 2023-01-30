@@ -8,14 +8,14 @@ import { Callout } from 'nextra-theme-docs';
 
 Yes 👍
 
-Feelstatic works by editing the local `.json` files and pushing those changes to your github repository. From there its up to your pipeline to make sure it's being deployed.
-Currently Feelstatic only works with NextJS and Vercel which ensures that any push that Feelstatic makes to you repository is being built & deployed and all pages/component are then statically generated.
+Feelstatic modifies the local `.json` files and then submits those modifications to your github repository. The responsibility of ensuring proper deployment falls on your pipeline thereafter.
+At present, Feelstatic is only compatible with Next.js and Vercel. This ensures that any updates pushed to your repository are properly built and deployed, resulting in the static generation of all pages and components.
 
-Therefor it's up to you as a developer to make sure the editable `.json` files are imported and used in your pages and components so they can be generated on build.
+As a developer, it is your responsibility to ensure that the editable `.json` files are imported and utilized in your pages and components, in order for them to be generated during the build process.
 
 ## Avoid indexing of Feelstatic admin
 
-To avoid the admin interface of `/feelstatic` being indexed by search engines, you should ensure that route is denying indexing. It can easily be done by adding a `head.tsx` file in `app/feelstatic/[[...fst]]` where you can use head meta from the Feelstatic package.
+To prevent search engines from indexing the admin interface of `/feelstatic`, make sure to deny indexing for that route. This can be accomplished by adding a `head.tsx` file in `app/feelstatic/[[...fst]]` and utilizing the head meta from the Feelstatic package.
 
 ```ts filename="app/feelstatic/[...fst]/head.tsx"
 import { FeelstaticHead } from 'feelstatic';
@@ -24,5 +24,5 @@ export default FeelstaticHead;
 ```
 
 <Callout type="info">
-    The `FeelstaticHead` export does nothing else than setting a `<title>` and `<meta name="robots" content="noindex,nofollow" />`
+    The `FeelstaticHead` export only serves to set the `<title>` and `<meta name="robots" content="noindex,nofollow" />`.
 </Callout>

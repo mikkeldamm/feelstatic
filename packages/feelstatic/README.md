@@ -13,14 +13,14 @@
   </a>
 </p>
 
-Feelstatic is a static content management system (CMS) for websites using Next.js. No need for databases, external services or complicated setups. It allows you to create, edit and save content that is automatically commited to your repository and deployed to your live website.
+Unleash the power of your website with Feelstatic - the ultimate static content management system (CMS) for Next.js. Say goodbye to the hassle of databases, external services and complicated setups. With Feelstatic, you can easily create, edit and delete content with just a few clicks, and watch as your changes are committed directly to your repository in real-time. Get ready to take your website to the next level with Feelstatic!
 
 ## Key features
 
-- Fast and easy setup
-- Static but endless possibilities
-- No database needed
-- Host for free on our existing sites
+- Quick and simple setup
+- Static yet highly flexible
+- Database-free
+- Host on your sites at no cost
 
 ## Getting started
 
