@@ -198,7 +198,14 @@ export const usePage = () => {
 
       const copiedItem = { ...firstItem };
       const cleanedItem = Object.entries(copiedItem).reduce((acc, [key, value]) => {
-        acc[key] = typeof value === 'string' ? '' : typeof value === 'number' ? 0 : false;
+        acc[key] =
+          typeof value === 'string'
+            ? ''
+            : typeof value === 'number'
+            ? 0
+            : typeof value === 'object' && value.hasOwnProperty('reference')
+            ? { ...value }
+            : false;
         return acc;
       }, copiedItem);
 
@@ -309,7 +316,14 @@ export const useComponent = () => {
 
       const copiedItem = { ...firstItem };
       const cleanedItem = Object.entries(copiedItem).reduce((acc, [key, value]) => {
-        acc[key] = typeof value === 'string' ? '' : typeof value === 'number' ? 0 : false;
+        acc[key] =
+          typeof value === 'string'
+            ? ''
+            : typeof value === 'number'
+            ? 0
+            : typeof value === 'object' && value.hasOwnProperty('reference')
+            ? { ...value }
+            : false;
         return acc;
       }, copiedItem);
 
