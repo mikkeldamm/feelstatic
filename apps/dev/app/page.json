@@ -24,7 +24,8 @@
     ]
   },
   "hero": {
-    "headline": "The best way to learn is to do"
+    "headline": "The best way to learn is to do",
+    "start_at": "2023-01-23T00:00:00.000Z"
   },
   "contact": {
     "headline": "Contact us",
