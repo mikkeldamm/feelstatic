@@ -1,14 +1,15 @@
-import { FeelstaticField } from '../../../state/field';
+import { FeelstaticField, FeelstaticFieldValue, FeelstaticReference } from '../../../state/field';
 import AdminViewImageField from './AdminViewImageField';
 import AdminViewNumberField from './AdminViewNumberField';
 import AdminViewRepeaterField from './AdminViewRepeaterField';
+import AdminViewSelectField from './AdminViewSelectField';
 import AdminViewTextField from './AdminViewTextField';
 
 type Props = {
   fields: FeelstaticField;
   onFieldChange: (
     field: string,
-    value: string | number | boolean,
+    value: FeelstaticFieldValue,
     repeater?: {
       index: number;
       field: string;
@@ -57,7 +58,18 @@ export default function AdminViewFields({ fields, onFieldChange, onAddItem, onRe
               }}
             />
           );
-        } else if (typeof fieldValue === 'object' && fieldValue.length > 0) {
+        } else if (typeof fieldValue === 'object' && fieldValue.hasOwnProperty('reference')) {
+          return (
+            <AdminViewSelectField
+              key={`${fieldName}_${fieldIndex}`}
+              name={fieldName}
+              value={fieldValue as FeelstaticReference}
+              onChange={(value) => {
+                onFieldChange(fieldName, value);
+              }}
+            />
+          );
+        } else if (Array.isArray(fieldValue)) {
           return (
             <AdminViewRepeaterField
               key={`${fieldName}_${fieldIndex}`}

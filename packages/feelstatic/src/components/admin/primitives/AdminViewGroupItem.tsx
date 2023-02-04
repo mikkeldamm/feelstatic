@@ -1,4 +1,4 @@
-import { FeelstaticField } from '../../../state/field';
+import { FeelstaticField, FeelstaticFieldValue } from '../../../state/field';
 import { FeelstaticGroupName } from '../../../state/group';
 import AdminViewFields from './AdminViewFields';
 
@@ -8,7 +8,7 @@ type Props = {
   onFieldChange: (
     group: string,
     field: string,
-    value: string | number | boolean,
+    value: FeelstaticFieldValue,
     repeater?: {
       index: number;
       field: string;

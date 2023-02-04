@@ -5,7 +5,7 @@ import useSWR from 'swr';
 import { fetcher } from '../../utils/fetcher';
 import { getItem, setItem } from '../../utils/storage';
 import { FeelstaticComponent } from '../component';
-import { FeelstaticRepeater } from '../field';
+import { FeelstaticFieldValue, FeelstaticRepeater } from '../field';
 import { FeelstaticImage } from '../image';
 import { FeelstaticPage } from '../page';
 import { componentsAtom, imagesAtom, pagesAtom, saveComponentDraftAtom, savePageDraftAtom } from './atoms';
@@ -112,7 +112,7 @@ export const useImages = () => {
 type UpdateFieldParams = {
   group: string;
   field: string;
-  value: string | number | boolean;
+  value: FeelstaticFieldValue;
   repeater?: {
     index: number;
     field: string;

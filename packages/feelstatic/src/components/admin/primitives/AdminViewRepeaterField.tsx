@@ -10,12 +10,13 @@ import {
 import { SortableContext, sortableKeyboardCoordinates, useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import { RiAddBoxFill, RiDeleteBin5Fill, RiMenu2Fill } from 'react-icons/ri';
+import { FeelstaticFieldValue } from '../../../state/field';
 import AdminViewFields from './AdminViewFields';
 
 type Props = {
   name: string;
   value: {
-    [key: string]: string | number | boolean;
+    [key: string]: FeelstaticFieldValue;
   }[];
   onFieldChange: (
     field: string,

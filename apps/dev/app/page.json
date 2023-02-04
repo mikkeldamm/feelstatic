@@ -1,10 +1,43 @@
 {
-  "hero": {
-    "show_mores": [true, false],
-    "headline": "The best way to learn is to do",
-    "items": [
+  "common": {
+    "countries": [
       {
-        "show_more": { "value": true, "reference": "hero.show_mores" }
+        "code": "DK",
+        "name": "Denmark",
+        "phone_ext": "+45"
+      },
+      {
+        "code": "SE",
+        "name": "Sweden",
+        "phone_ext": "+46"
+      },
+      {
+        "code": "NO",
+        "name": "Norway",
+        "phone_ext": "+47"
+      },
+      {
+        "code": "FI",
+        "name": "Finland",
+        "phone_ext": "+358"
+      }
+    ]
+  },
+  "hero": {
+    "headline": "The best way to learn is to do"
+  },
+  "contact": {
+    "headline": "Contact us",
+    "locations": [
+      {
+        "city": "Copenhagen",
+        "phone": "11223344",
+        "country": { "value": "DK", "reference": "common.countries", "field": "code", "label": "name" }
+      },
+      {
+        "city": "Stockholm",
+        "phone": "11223344",
+        "country": { "value": "SE", "reference": "common.countries", "field": "code", "label": "name" }
       }
     ]
   }

@@ -53,7 +53,6 @@ const PageGroups = ({ page }: { page: FeelstaticPage }) => {
             name={name}
             groupFields={groupFields}
             onFieldChange={(group, field, value, repeater) => {
-              console.log({ group, field, value, repeater });
               updateField({ group, field, value, repeater });
             }}
             onAddItem={(group, field) => {

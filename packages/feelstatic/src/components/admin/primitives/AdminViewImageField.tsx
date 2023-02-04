@@ -152,7 +152,6 @@ export default function AdminViewImageField({ name, value, onChange }: Props) {
       onSelect: (imageSource) => {
         setImageValue(imageSource);
         onChange(imageSource);
-        console.log('source set', imageSource);
       },
     });
   };

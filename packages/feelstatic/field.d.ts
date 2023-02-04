@@ -1,1 +1,1 @@
-export { default } from './dist/components/field';
+export { default, getReferencedField } from './dist/components/field';

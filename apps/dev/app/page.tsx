@@ -5,6 +5,8 @@ import styles from './page.module.css';
 import Footer from '@/components/footer';
 import page from './page.json';
 
+import { getReferencedField } from 'feelstatic/field';
+
 const inter = Inter({ subsets: ['latin'] });
 
 export default function Home() {
@@ -70,6 +72,24 @@ export default function Home() {
           </h2>
           <p className={inter.className}>Instantly deploy your Next.js site to a shareable URL with Vercel.</p>
         </a>
+      </div>
+      <div>
+        <h2>{page.contact.headline}</h2>
+        <small>Locations</small>
+        <div>
+          {page.contact.locations.map((location) => {
+            const country = getReferencedField<(typeof page)['common']['countries'][0]>(page, location.country);
+            return (
+              <div key={location.city}>
+                <h3>{location.city}</h3>
+                <p>{country?.name}</p>
+                <p>
+                  {country?.phone_ext} {location.phone}
+                </p>
+              </div>
+            );
+          })}
+        </div>
       </div>
       <Footer />
     </main>
