@@ -9,9 +9,12 @@ import {
 } from '@dnd-kit/core';
 import { SortableContext, sortableKeyboardCoordinates, useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
-import { RiAddBoxFill, RiDeleteBin5Fill, RiMenu2Fill } from 'react-icons/ri';
+import { useState } from 'react';
+import { RiAddBoxFill, RiDeleteBin5Fill, RiLayoutGridLine, RiLayoutRowLine, RiMenu2Fill } from 'react-icons/ri';
 import { FeelstaticFieldValue } from '../../../state/field';
 import AdminViewFields from './AdminViewFields';
+
+type RepeaterView = 'list' | 'grid';
 
 type Props = {
   name: string;
@@ -31,7 +34,14 @@ type Props = {
   onReorderItem: (field: string, fromIndex: number, toIndex: number) => void;
 };
 
-const RepeaterItem = ({ name, repeaterItem, repeaterIndex, onFieldChange, removeItem }: any) => {
+const RepeaterItem = ({
+  name,
+  view,
+  repeaterItem,
+  repeaterIndex,
+  onFieldChange,
+  removeItem,
+}: any & { view: RepeaterView }) => {
   const id = JSON.stringify(repeaterItem);
   const { attributes, listeners, setNodeRef, transform, transition } = useSortable({ id });
 
@@ -40,15 +50,30 @@ const RepeaterItem = ({ name, repeaterItem, repeaterIndex, onFieldChange, remove
     transition,
   };
 
+  const fieldsCount = view === 'list' ? 1 : Object.entries(repeaterItem).length;
+  const gridTemplateColumns = `repeat(${fieldsCount > 4 ? 4 : fieldsCount}, 1fr)`;
+  const paddingY = view === 'list' ? 24 : 12;
+  const marginBottom = view === 'list' ? undefined : '-1rem';
+
   return (
     <div
-      className="bg-[#f8faf7] hover:bg-[#eff1ed] grid grid-cols-[auto,1fr,auto] gap-6 items-start py-6 mt-2"
-      style={style}
+      className="bg-[#f8faf7] hover:bg-[#eff1ed] grid grid-cols-[auto,1fr,auto] gap-6 items-start mt-2"
+      style={{
+        ...style,
+        paddingTop: paddingY,
+        paddingBottom: paddingY,
+      }}
     >
       <div className="pl-6 cursor-row-resize" ref={setNodeRef} {...attributes} {...listeners}>
         <RiMenu2Fill className="w-5 h-5" />
       </div>
-      <div>
+      <div
+        className="grid gap-1"
+        style={{
+          gridTemplateColumns: gridTemplateColumns,
+          marginBottom: marginBottom,
+        }}
+      >
         <AdminViewFields
           fields={repeaterItem}
           onFieldChange={(fieldName, fieldValue) =>
@@ -77,6 +102,7 @@ export default function AdminViewRepeaterField({
   onRemoveItem,
   onReorderItem,
 }: Props) {
+  const [view, setView] = useState<RepeaterView>(value.length > 3 ? 'grid' : 'list');
   const sensors = useSensors(
     useSensor(MouseSensor),
     useSensor(PointerSensor, {
@@ -112,13 +138,32 @@ export default function AdminViewRepeaterField({
 
   return (
     <>
-      <div className="text-xs uppercase mb-1.5 font-medium">{name}</div>
+      <div className="text-xs uppercase mb-1.5 font-medium flex items-center">
+        {name}
+        <div className="flex items-center ml-2 bg-[#e7e8e7] py-[3px] px-[5px]">
+          <div
+            onClick={() => setView('list')}
+            className="cursor-pointer"
+            style={{ color: view === 'list' ? '#000' : '#85988e' }}
+          >
+            <RiLayoutRowLine className="w-4 h-4" />
+          </div>
+          <div
+            onClick={() => setView('grid')}
+            className="ml-1 cursor-pointer"
+            style={{ color: view === 'grid' ? '#000' : '#85988e' }}
+          >
+            <RiLayoutGridLine className="w-4 h-4" />
+          </div>
+        </div>
+      </div>
       <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
         <SortableContext items={value.map((repeaterItem) => ({ id: JSON.stringify(repeaterItem) }))}>
           {value.map((repeaterItem, repeaterIndex) => {
             return (
               <RepeaterItem
                 key={repeaterIndex}
+                view={view}
                 className="bg-[#f8faf7] hover:bg-[#eff1ed] grid grid-cols-[auto,1fr,auto] gap-6 items-start py-6 mt-2"
                 name={name}
                 repeaterItem={repeaterItem}

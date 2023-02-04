@@ -35,7 +35,7 @@ export default function AdminViewTextField({ name, value: fieldValue, onChange }
     <div className="mb-4">
       <div className="text-xs uppercase mb-1.5 font-medium">{name}</div>
       <select
-        className="border border-[#c3c7c5] bg-white px-3 py-3 text-[#09150f] focus:border-[#09150f] focus:outline-none"
+        className="border border-[#c3c7c5] w-full bg-white px-3 py-3 text-[#09150f] focus:border-[#09150f] focus:outline-none"
         onChange={(e) => {
           const selectedValue = e.target.value;
           onChange({
