@@ -6,7 +6,7 @@ import { Callout } from 'nextra-theme-docs';
 
 ## Installation
 
-Inside your NextJS project directory, run the following:
+Inside your Next.js project directory, run the following:
 
 <Tabs items={['npm', 'pnpm', 'yarn']}>
   <Tab>`npm install feelstatic`</Tab>
@@ -15,14 +15,14 @@ Inside your NextJS project directory, run the following:
 </Tabs>
 
 <Callout type="info">
-  If you are using TypeScript, Feelstatic comes with its types definitions within the package
+  Feelstatic comes with type definitions for TypeScript. If you are using TypeScript, you don't need to install any additional packages.
 </Callout>
 
 ## Quick Start
 
 ### Add api route
 
-First you need to create a file called `[[...fst]].ts` in `pages/api/feelstatic`. This contains the dynamic api route handler for Feelstatic.
+Start out by creating a file called `[[...fst]].ts` in `pages/api/feelstatic`. This contains the dynamic API route handler for Feelstatic.
 
 ```ts filename="pages/api/feelstatic/[[...fst]].ts"
 import { FeelstaticApi } from 'feelstatic/api';
@@ -38,13 +38,11 @@ export default FeelstaticApi({
 });
 ```
 
-All requests to `/api/feelstatic/*` (pages, components, image etc.) will automatically be handled by Feelstatic.
-
-The reason why you need to specify and join the paths here is because when NextJS builds on Vercel, then it will only trace (output) files needed for that specific handler - in this case the Feelstatic API. So if you don't specific the paths where your json and image are located, then Feelstatic won't be able to fetch and show them.
+It's important to specify and join the paths in this instance because when Next.js is built on Vercel, it only traces files that are necessary for the specific handler - in this case, the Feelstatic API. If the paths for your json and image files are not specified, Feelstatic will not be able to retrieve and display them.
 
 ### Add page route
 
-Then you need to create a `page.tsx` file in `app/feelstatic/[[...fst]]`. This contains the Feelstatic application that you can access on the site.
+Create a `page.tsx` file in `app/feelstatic/[[...fst]]`. This includes the Feelstatic application and makes it available on the website.
 
 ```ts filename="app/feelstatic/[[...fst]]/page.tsx"
 import { FeelstaticPage } from 'feelstatic';
@@ -54,30 +52,32 @@ export default FeelstaticPage;
 
 ### Set environment variables
 
-There are 3 required environment variables that you need to set.
+Three environment variables must be set.
 
 ```
 FST_GITHUB_OWNER
 ```
 
-This should be set to the owner/person/organization url of the github repository (e.g. `mikkeldamm`)
+Set this to the owner/person/organization of the github repository (e.g. `mikkeldamm`)
+
 
 ```
 FST_GITHUB_REPO
 ```
 
-This should be set to the repository name (e.g. `feelstatic`)
+Set this to the repository name (e.g. `feelstatic`)
+
 
 ```
 FST_GITHUB_ACCESS_TOKEN
 ```
 
-This is the most important one. You need to get your [github access token](https://github.com/settings/tokens?type=beta) and set it.
+Get your [github access token](https://github.com/settings/tokens?type=beta) and set it here.
 
 <Callout type="default">
     You should only allow the token to access the repository that you are working with, and only choose the following permissions:
     - Read access to commit statuses and metadata
-    - Read and Write access to code
+    - Read and Write access to content
 
 </Callout>
 <Callout type="info">
