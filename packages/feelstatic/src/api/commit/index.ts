@@ -5,6 +5,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     token: process.env.FST_GITHUB_ACCESS_TOKEN,
     owner: process.env.FST_GITHUB_OWNER,
     repo: process.env.FST_GITHUB_REPO,
-    branch: process.env.FST_GITHUB_BRANCH || 'main',
+    branch: process.env.FST_GITHUB_BRANCH || process.env.VERCEL_GIT_COMMIT_REF || 'main',
   });
 }
