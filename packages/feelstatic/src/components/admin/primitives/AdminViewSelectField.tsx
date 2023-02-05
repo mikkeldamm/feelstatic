@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { PageContext } from '../../../state/admin/contexts';
+import { ComponentContext, PageContext } from '../../../state/admin/contexts';
 import {
   FeelstaticField,
   FeelstaticFieldName,
@@ -17,10 +17,11 @@ type Props = {
 
 export default function AdminViewTextField({ name, value: fieldValue, onChange }: Props) {
   const { page } = useContext(PageContext);
+  const { component } = useContext(ComponentContext);
 
   const referencedField = fieldValue.reference.split('.').reduce((acc, curr) => {
     return (acc as FeelstaticGroup | FeelstaticField)[curr];
-  }, (page?.groups || {}) as FeelstaticGroup | FeelstaticField | FeelstaticFieldValue) as FeelstaticRepeater;
+  }, (page?.groups || component?.groups || {}) as FeelstaticGroup | FeelstaticField | FeelstaticFieldValue) as FeelstaticRepeater;
 
   const options = referencedField.map((referenceField) => {
     const referenceFieldValue = referenceField[fieldValue.field];
