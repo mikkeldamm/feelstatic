@@ -74,7 +74,7 @@ const PublishStatus = () => {
 
 export const PublishButton = () => {
   const [changes] = useAtom(changesAtom);
-  const hasChanges = changes.pages.length > 0;
+  const hasChanges = changes.pages.length > 0 || changes.components.length > 0 || changes.images.length > 0;
   const countOfChanges = changes.pages.length + changes.components.length + changes.images.length;
   const setCommitSha = useSetAtom(commitShaAtom);
   const [{ pages, components, images }] = useAtom(changesAtom);
