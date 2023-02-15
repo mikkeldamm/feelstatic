@@ -12,6 +12,12 @@ export default function AdminViewDateField({ name, value, onChange }: Props) {
   const isWithoutTime = value.includes('00:00:00.000');
   const [type, setType] = useState(isWithoutTime ? 'date' : 'datetime-local');
 
+  const date = new Date(value);
+  const dateValue = new Intl.DateTimeFormat('fr-CA', { year: 'numeric', month: '2-digit', day: '2-digit' }).format(
+    date
+  );
+  const timeValue = new Intl.DateTimeFormat('en-UK', { hour: 'numeric', minute: 'numeric' }).format(date);
+
   return (
     <div className="mb-4">
       <div className="text-xs uppercase mb-1.5 font-medium flex items-center">
@@ -39,10 +45,10 @@ export default function AdminViewDateField({ name, value, onChange }: Props) {
       </div>
       <input
         type={type}
-        value={type === 'date' ? value.split('T')[0] : value.split(':00.000')[0]}
+        value={type === 'date' ? dateValue : `${dateValue}T${timeValue}`}
         className="border border-[#c3c7c5] w-full bg-white px-3 py-3 text-[#09150f] focus:border-[#09150f] focus:outline-none"
         onChange={(e) => {
-          const value = e.target.valueAsNumber;
+          const value = e.target.value;
           onChange(new Date(value).toISOString());
         }}
       />
