@@ -15,7 +15,8 @@ Inside your Next.js project directory, run the following:
 </Tabs>
 
 <Callout type="info">
-  Feelstatic comes with type definitions for TypeScript. If you are using TypeScript, you don't need to install any additional packages.
+  Feelstatic comes with type definitions for TypeScript. If you are using TypeScript, you don't need to install any
+  additional packages.
 </Callout>
 
 ## Quick Start
@@ -28,12 +29,14 @@ Start out by creating a file called `[[...fst]].ts` in `pages/api/feelstatic`. T
 import { FeelstaticApi } from 'feelstatic/api';
 import { join } from 'path';
 
+const ROOT_PATH = process.cwd();
+
 export default FeelstaticApi({
   paths: {
-    root: process.cwd(),
-    pages: [join(process.cwd(), '/app'), join(process.cwd(), '/pages')],
-    components: [join(process.cwd(), '/app'), join(process.cwd(), '/components')],
-    images: join(process.cwd(), '/public/images'),
+    root: ROOT_PATH,
+    pages: [join(ROOT_PATH, '/app'), join(ROOT_PATH, '/pages')],
+    components: [join(ROOT_PATH, '/app'), join(ROOT_PATH, '/components')],
+    images: join(ROOT_PATH, '/public/images'),
   },
 });
 ```
@@ -60,13 +63,11 @@ FST_GITHUB_OWNER
 
 Set this to the owner/person/organization of the github repository (e.g. `mikkeldamm`)
 
-
 ```
 FST_GITHUB_REPO
 ```
 
 Set this to the repository name (e.g. `feelstatic`)
-
 
 ```
 FST_GITHUB_ACCESS_TOKEN

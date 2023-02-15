@@ -1,16 +1,18 @@
 import { FeelstaticApi } from 'feelstatic/api';
 import { join } from 'path';
 
+const ROOT_PATH = process.cwd();
+
 export default FeelstaticApi({
   paths: {
-    root: process.cwd(),
-    pages: [join(process.cwd(), '/app'), join(process.cwd(), '/pages')],
+    root: ROOT_PATH,
+    pages: [join(ROOT_PATH, '/app'), join(ROOT_PATH, '/pages')],
     components: [
-      join(process.cwd(), '/app'),
-      join(process.cwd(), '/pages'),
-      join(process.cwd(), '/components'),
-      join(process.cwd(), '/views'),
+      join(ROOT_PATH, '/app'),
+      join(ROOT_PATH, '/pages'),
+      join(ROOT_PATH, '/components'),
+      join(ROOT_PATH, '/views'),
     ],
-    images: join(process.cwd(), '/public/images'),
+    images: join(ROOT_PATH, '/public/images'),
   },
 });
