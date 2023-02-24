@@ -1,4 +1,4 @@
-import { Inter } from '@next/font/google';
+import { Inter } from 'next/font/google';
 import Image from 'next/image';
 import styles from './page.module.css';
 

@@ -6,16 +6,15 @@ import AdminPublish from '../components/admin/views/AdminPublish';
 
 type FeelstaticPageProps = {
   params: { fst: string[] };
-  onSignOut?: () => void;
 };
 
-export const FeelstaticPage = async ({ params: { fst }, onSignOut }: FeelstaticPageProps) => {
+export const FeelstaticPage = async ({ params: { fst } }: FeelstaticPageProps) => {
   const view = fst ? fst[0] : 'pages';
   const isEdit = fst ? fst[1] === 'edit' : false;
   const itemUrl = fst && isEdit ? `/${fst.slice(2).join('/')}` : null;
 
   return (
-    <AdminLayout onSignOut={onSignOut}>
+    <AdminLayout>
       {view === 'pages' && <AdminPages pageUrl={itemUrl} />}
       {view === 'components' && <AdminComponents componentUrl={itemUrl} />}
       {view === 'media' && <AdminMedia />}
