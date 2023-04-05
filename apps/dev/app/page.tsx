@@ -1,11 +1,9 @@
+import Footer from '@/components/footer';
+import { getReferencedField } from 'feelstatic/utils';
 import { Inter } from 'next/font/google';
 import Image from 'next/image';
-import styles from './page.module.css';
-
-import Footer from '@/components/footer';
 import page from './page.json';
-
-import { getReferencedField } from 'feelstatic/field';
+import styles from './page.module.css';
 
 const inter = Inter({ subsets: ['latin'] });
 
