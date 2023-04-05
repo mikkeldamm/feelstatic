@@ -1,1 +1,1 @@
-export * from './dist/utils/field';
+export { getReferencedField } from './dist/utils/field';

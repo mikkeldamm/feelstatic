@@ -1,1 +1,1 @@
-export * from './dist/components/field';
+export { default } from './dist/components/field';
